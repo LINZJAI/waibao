@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+
+    <link
+      rel="stylesheet"
+      href="./sdk/video/css/bootstrap-material-design.min.css"
+    />
+    <link rel="stylesheet" href="./sdk/video/css/index.css" />
+    <link rel="stylesheet" href="./sdk/video/css/room.css" />
+
+    <title><%= webpackConfig.name %></title>
+  </head>
+  <body>
+    <noscript>
+      <strong
+        >We're sorry but <%= webpackConfig.name %> doesn't work properly without
+        JavaScript enabled. Please enable it to continue.</strong
+      >
+    </noscript>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+    <script
+      type="text/javascript"
+      src="//api.map.baidu.com/api?v=2.0&ak=aF1zzk9AtHW4a5OzCrKV3oaR4sGoGlyI"
+    ></script>
+
+    <script src="./sdk/video/js/jquery-3.2.1.min.js"></script>
+    <script src="./sdk/video/js/popper.js"></script>
+    <script src="./sdk/video/js/bootstrap-material-design.js"></script>
+    <script>
+      $(document).ready(function() {
+        // $('body').bootstrapMaterialDesign()
+      })
+    </script>
+    <script src="./sdk/video/js/lib-generate-test-usersig.min.js"></script>
+    <script src="./sdk/video/js/debug/GenerateTestUserSig.js"></script>
+    <script src="./sdk/video/js/debug/GenerateTestUserSig-im.js"></script>
+    <script src="./sdk/video/js/trtc.js"></script>
+    <script src="./sdk/video/js/common.js"></script>
+    <script src="./sdk/video/js/rtc-client.js"></script>
+    <script src="./sdk/video/js/share-client.js"></script>
+    <script src="./sdk/video//js/debug/lib-generate-test-usersig.min.js"></script>
+    <!-- <script src="./sdk/video/js/presetting.js"></script> -->
+    <!-- <script src="./sdk/video/js/index.js"></script> -->
+  </body>
+</html>

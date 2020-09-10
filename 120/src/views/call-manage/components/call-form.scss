@@ -1,0 +1,38 @@
+.call-form {
+  padding: 8px 20px;
+  .el-select {
+    width: 100%;
+  }
+  /deep/ .el-form-item--mini.el-form-item {
+    margin-bottom: 8px;
+  }
+  /deep/ .el-form-item__label {
+    font-size: 12px;
+    color: #333333;
+  }
+  /deep/ .el-tabs__item {
+    font-size: 12px;
+    color: #333333;
+    line-height: 25px;
+    height: 25px;
+  }
+  /deep/ .el-radio-group {
+    padding-top: 7px;
+    line-height: 20px;
+    .el-radio {
+      font-size: 12px;
+      color: #333333;
+    }
+  }
+  .bottom-form {
+    margin-top: 10px;
+  }
+
+  .footer-btn {
+    text-align: center;
+    padding-bottom: 10px;
+    .el-button {
+      width: 100%;
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "mta-h5-analysis": "^2.0.19",
+    "stylus": "^0.54.8",
+    "trtc-js-sdk": "^4.6.0"
+  },
+  "devDependencies": {
+    "stylus": "^0.54.8",
+    "stylus-loader": "^3.0.2"
+  }
+}
