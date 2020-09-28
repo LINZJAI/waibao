@@ -118,9 +118,11 @@ export default {
       let data = { ...this.formData }
       var myGeo = new BMap.Geocoder()
       // 将地址解析结果显示在地图上,并调整地图视野
-      myGeo.getPoint(this.eventLocation, point => {
+      if (!this.formData.eventLocation) {
+        return this.$message.warning('请输入地址!')
+      }
+      myGeo.getPoint(this.formData.eventLocation, point => {
         if (point) {
-          // console.log(point, 'point')
           data.latitude = point.lat
           data.longitude = point.lng
           data.taskSendList = this.formData.taskSend
