@@ -55,11 +55,11 @@ service.interceptors.response.use(
       return Promise.reject(new Error(res.message || 'Error'))
     } else if (res.code == '301') {
       // to re-login
-      Message({
-        message: res.desc || 'Error',
-        type: 'warning',
-        duration: 2 * 1000
-      })
+      // Message({
+      //   message: res.desc || 'Error',
+      //   type: 'warning',
+      //   duration: 2 * 1000
+      // })
       router.push('/login')
     } else {
       return res

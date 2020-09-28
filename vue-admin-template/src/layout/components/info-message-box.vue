@@ -39,7 +39,9 @@
         :onclick="
           `window.app.$router.push('/consultation/detail?roomId=${
             this.info.roomId
-          }'&groupId=${window.encodeURIComponent(this.info.groupId)})`
+          }'&groupId=${window.encodeURIComponent(this.info.groupId)})&id=${
+            this.info.consultId
+          }`
         "
         v-if="info.subType == 'apply'"
       >

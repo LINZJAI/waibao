@@ -189,3 +189,25 @@ export function getConsultDetailForCarNo(carNo) {
     method: 'get'
   })
 }
+
+/** 获取会诊详情 */
+export function getConsultDetail(id) {
+  return request({
+    url: `/consult/info/getDetail/${id}`,
+    method: 'get'
+  })
+}
+/** 获取会诊详情 */
+export function getDetailByPatientId(patientId) {
+  return request({
+    url: `/consult/info/getDetailByPatientId/${patientId}`,
+    method: 'get'
+  })
+}
+/** 获取患者详情 */
+export function getPatientDetail(patientId) {
+  return request({
+    url: `/dispatch/patientInfo/getDetail/${patientId}`,
+    method: 'get'
+  })
+}

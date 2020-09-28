@@ -47,7 +47,13 @@
             size="medium"
             placeholder="请选择医院"
             v-if="tabIndex == 1"
-          ></el-select>
+            v-model="his"
+          >
+            <el-option
+              :value="'古县人民医院'"
+              :label="'古县人民医院'"
+            ></el-option>
+          </el-select>
           <el-input
             class="login-input"
             size="medium"
@@ -205,7 +211,8 @@ export default {
     return {
       tabIndex: 1,
       empNo: 'admin',
-      password: '123456'
+      password: '123456',
+      his: '古县人民医院'
     }
   },
   methods: {

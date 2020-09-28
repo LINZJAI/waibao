@@ -12,63 +12,63 @@
           </colgroup>
           <tr>
             <td>急救编号：</td>
-            <td>20170932847274</td>
+            <td>{{ info.taskNo }}</td>
           </tr>
           <tr>
             <td>求救类型：</td>
-            <td>心脏病突发</td>
+            <td>{{ info.task.eventType }}</td>
           </tr>
           <tr>
             <td>危重等级：</td>
-            <td>危重</td>
+            <td>{{ info.task.dangerLevel }}</td>
           </tr>
           <tr>
             <td>发单时间：</td>
-            <td>2017-07-09 11:22:32</td>
+            <td>{{ info.task.dispatchTime }}</td>
           </tr>
           <tr>
             <td>患者姓名：</td>
-            <td>张小强</td>
+            <td>{{ info.task.patientName }}</td>
           </tr>
           <tr>
             <td>性 别：</td>
-            <td>男</td>
+            <td>{{ info.task.sex }}</td>
           </tr>
           <tr>
             <td>年 龄：</td>
-            <td>12岁</td>
+            <td>{{ info.task.age }}岁</td>
           </tr>
           <tr>
             <td>身 份：</td>
-            <td>普通</td>
+            <td>{{ info.task.personDesc }}</td>
           </tr>
           <tr>
             <td>主 诉：</td>
-            <td>心绞痛</td>
+            <td>{{ info.task.complaints }} </td>
           </tr>
           <tr>
             <td>车牌号：</td>
-            <td>粤F-39HE2</td>
+            <td>{{ info.carNo }}</td>
           </tr>
           <tr>
             <td>到院时间：</td>
-            <td>约25分钟后</td>
+            <td>{{ info.arrivedHospitalTime }}</td>
           </tr>
           <tr>
             <td>任务状态：</td>
-            <td>驶向医院</td>
+            <td>{{ info.nodeName }}</td>
           </tr>
           <tr>
             <td>出诊医生：</td>
-            <td>刘东东（全科）</td>
+            <td>{{ info.doctorList.map(item => item.empName).join('，') }}</td>
           </tr>
           <tr>
             <td>初步诊断：</td>
-            <td>突发性心脏病</td>
+            <td>{{ measure.diagnosis }}</td>
           </tr>
           <tr>
             <td>会诊目的：</td>
-            <td>指导急性心肌梗死急救处理急性 心肌梗死急救处理</td>
+            <td>{{ data.title }}</td>
           </tr>
         </table>
       </div>
@@ -78,10 +78,8 @@
         <Video></Video>
       </div>
       <div class="main-bottom-part">
-        <div class="main-bottom-left-part">
-          监控
-        </div>
-        <div class="main-bottom-right-part">视频2</div>
+        <div class="main-bottom-left-part"> </div>
+        <div class="main-bottom-right-part"></div>
       </div>
     </div>
     <div class="right-part">
@@ -101,7 +99,8 @@
               </td>
               <td class="value">
                 <div>
-                  孔帝魁（心血管科）
+                  --
+                  <!-- 孔帝魁（心血管科） -->
                 </div>
               </td>
             </tr>
@@ -111,14 +110,15 @@
               </td>
               <td class="value">
                 <div>
+                  --
+                  <!-- 孔帝魁（心血管科） -->
+                </div>
+                <!-- <div>
                   孔帝魁（心血管科）
                 </div>
                 <div>
                   孔帝魁（心血管科）
-                </div>
-                <div>
-                  孔帝魁（心血管科）
-                </div>
+                </div> -->
               </td>
             </tr>
           </table>
@@ -182,7 +182,8 @@
     align-items: stretch;
     .main-bottom-left-part {
       flex: 1;
-      background: url('./images/心电动图.gif');
+      /* background: url('./images/心电动图.gif'); */
+      background: url('./images/连接中.png');
       background-size: cover;
     }
     .main-bottom-right-part {
@@ -243,7 +244,19 @@
     padding: 0 !important;
     background: #000;
     overflow: hidden;
-    #main-video,
+    #main-video {
+      position: fixed !important;
+      width: calc((100vw - 550px) / 2);
+      height: calc((100vh - 50px) / 3);
+      z-index: 111;
+      bottom: 0;
+      left: 250px;
+      padding: 0;
+      video {
+        object-fit: cover !important;
+        background: url('./images/连接中.png');
+      }
+    }
     .video-box {
       float: left;
       width: 33.33%;
@@ -276,12 +289,35 @@
 <script>
 import Video from './components/video/index.vue'
 import Im from './components/im/index.vue'
+import {
+  getConsultDetail,
+  getPatientDetail,
+  getTaskDispatchDetail
+} from '@/api/common'
 export default {
   props: {},
   data() {
-    return {}
+    return {
+      data: {},
+      info: {
+        task: {},
+        doctorList: []
+      },
+      measure: {}
+    }
   },
   methods: {},
+  created() {
+    getConsultDetail(this.$route.query.id).then(res => {
+      this.data = res.data
+      getTaskDispatchDetail(res.data.dispatchId).then(res => {
+        this.info = res.data
+      })
+      getPatientDetail(res.data.patientId).then(res => {
+        this.measure = res.data[0].measure
+      })
+    })
+  },
   components: {
     Video,
     Im

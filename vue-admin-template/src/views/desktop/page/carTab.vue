@@ -88,24 +88,24 @@
             @click="activeTab = 1"
             >地图定位</div
           >
-          <div
+          <!-- <div
             class="tab-item"
             :class="{ active: activeTab === 2 }"
             @click="activeTab = 2"
             >生命体征</div
-          >
+          > -->
           <div
             class="tab-item"
             :class="{ active: activeTab === 3 }"
             @click="activeTab = 3"
             >院前病历</div
           >
-          <div
+          <!-- <div
             class="tab-item"
             :class="{ active: activeTab === 4 }"
             @click="activeTab = 4"
             >心电数据</div
-          >
+          > -->
         </div>
         <div class="content">
           <Map v-if="activeTab === 1"></Map>

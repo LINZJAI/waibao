@@ -151,8 +151,6 @@
 .danger {
   color: red;
 }
-
-
 </style>
 <script>
 import { getConsultList } from '@/api/common'
@@ -272,7 +270,7 @@ export default {
       this.$router.push(
         `/consultation/detail?roomId=${
           item.roomId
-        }&groupId=${window.encodeURIComponent(item.groupId)}`
+        }&groupId=${window.encodeURIComponent(item.groupId)}&id=${item.id}`
       )
     }
   },
