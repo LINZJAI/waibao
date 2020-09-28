@@ -56,18 +56,18 @@
                   <th>性别</th>
                   <th>年龄</th>
                   <th>身份</th>
-                  <th>操作</th>
+                  <!-- <th>操作</th> -->
                 </tr>
                 <tr>
                   <td>{{ info.patientName }}</td>
                   <td>{{ info.sex }}</td>
                   <td>{{ info.age }}岁</td>
                   <td>{{ info.personDesc }}</td>
-                  <td>
+                  <!-- <td>
                     <el-button type="text" size="mini" @click="openUrl"
                       >查看档案</el-button
                     >
-                  </td>
+                  </td> -->
                 </tr>
               </table>
             </div>
