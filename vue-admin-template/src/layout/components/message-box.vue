@@ -3,22 +3,22 @@
     <div class="head-con">{{ info.title }}</div>
     <div class="message-table-con">
       <table class="message-table">
-        <tr class="row">
+        <tr class="message-row">
           <td class="left">姓名：{{ info.task.patientName }}</td>
           <td class="right">性别：姓名：{{ info.task.sex }}</td>
         </tr>
-        <tr class="row">
+        <tr class="message-row">
           <td class="left">年龄：{{ info.task.age }}</td>
           <td class="right">身份：{{ info.task.personDesc }}</td>
         </tr>
-        <tr class="row">
+        <tr class="message-row">
           <td class="left">联系人：{{ info.task.contactName }}</td>
           <td class="right">电话：{{ info.task.contactPhone }}</td>
         </tr>
-        <tr class="row">
+        <tr class="message-row">
           <td colspan="2">地址：{{ info.task.eventLocation }}</td>
         </tr>
-        <tr class="row">
+        <tr class="message-row">
           <td colspan="2">主诉：{{ info.task.complaints }}</td>
         </tr>
         <tr>
@@ -55,7 +55,7 @@
   .left {
     border-right: 1px dashed #ddd;
   }
-  .row {
+  .message-row {
     border-bottom: 1px dashed #ddd;
   }
 }

@@ -48,7 +48,7 @@
 .search-wrapper {
   position: fixed;
   left: 20px;
-  top: 96px;
+  top: 92px;
   z-index: 2;
 }
 .search-input-con {
@@ -82,8 +82,8 @@
 
 .search-content {
   width: 380px;
-  margin-top: 10px;
-  min-height: 500px;
+  margin-top: 5px;
+  min-height: 400px;
   background: #fff;
 
   .tab-con {
@@ -105,6 +105,17 @@
       }
       &.active {
         color: #2aa4a7;
+      }
+    }
+  }
+
+  .form-con {
+    /deep/ {
+      .tab-textarea .el-textarea__inner {
+        height: 40px;
+      }
+      .el-radio__label {
+        font-size: 12px;
       }
     }
   }

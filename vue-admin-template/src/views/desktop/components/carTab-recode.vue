@@ -2,7 +2,7 @@
   <div class="record-wrapper">
     <div class="tree-con">
       <div class="tree-header">
-        <div class="title">急救编号：{{ $route.query.taskNo }}</div>
+        <div class="title">急救编号：{{ taskNo }}</div>
         <!-- <div class="btn">
           <el-button size="small" type="text" icon="el-icon-plus"
             >新增记录</el-button
@@ -109,7 +109,11 @@ import evalList from '../../patient/components/evalList'
 import { getListByTaskNo, saveOrUpdateInfo } from '@/api/common'
 import print from 'printing'
 export default {
-  props: {},
+  props: {
+    taskNo: {
+      type: String
+    }
+  },
   data() {
     return {
       currentPatient: null,
@@ -121,7 +125,7 @@ export default {
   },
   methods: {
     init() {
-      let taskNo = this.$route.query.taskNo
+      let taskNo = this.taskNo
       return getListByTaskNo(taskNo).then(res => {
         this.patientList = res.data.map(item => {
           item.measure = item.measure || {}

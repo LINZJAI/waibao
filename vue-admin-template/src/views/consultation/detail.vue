@@ -314,7 +314,7 @@ export default {
         this.info = res.data
       })
       getPatientDetail(res.data.patientId).then(res => {
-        this.measure = res.data[0].measure
+        this.measure = res.data[0].measure || {}
       })
     })
   },

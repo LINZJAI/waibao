@@ -46,6 +46,14 @@
       <el-form-item label="病人身份：">
         <el-input v-model="formData.personDesc" size="mini"></el-input>
       </el-form-item>
+
+      <el-form-item label="危重等级">
+        <el-select v-model="formData.dangerLevel" size="mini">
+          <el-option value="一般" label="一般"></el-option>
+          <el-option value="严重" label="严重"></el-option>
+          <el-option value="非常严重" label="非常严重"></el-option>
+        </el-select>
+      </el-form-item>
     </el-form>
 
     <el-tabs v-model="activeTab">
@@ -67,10 +75,10 @@
     <el-form label-width="100px" size="mini" class="bottom-form">
       <el-form-item label="患者情况：">
         <el-radio-group v-model="formData.patientCondition" size="mini">
-          <el-radio label="昏迷">昏迷</el-radio>
-          <el-radio label="清醒">清醒</el-radio>
-          <el-radio label="意识不清">意识不清</el-radio>
-          <el-radio label="死亡">死亡</el-radio>
+          <el-radio label="昏迷" size="mini">昏迷</el-radio>
+          <el-radio label="清醒" size="mini">清醒</el-radio>
+          <el-radio label="意识不清" size="mini">意识不清</el-radio>
+          <el-radio label="死亡" size="mini">死亡</el-radio>
         </el-radio-group>
       </el-form-item>
     </el-form>

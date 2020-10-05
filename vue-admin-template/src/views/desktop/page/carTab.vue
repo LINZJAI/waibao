@@ -114,7 +114,10 @@
             src="../../consultation/images/心电动图.gif"
             v-if="activeTab === 2"
           />
-          <CarTabRecode v-if="activeTab === 3"></CarTabRecode>
+          <CarTabRecode
+            v-if="activeTab === 3 && taskInfo.taskNo"
+            :taskNo="taskInfo.taskNo"
+          ></CarTabRecode>
           <XDT v-show="activeTab === 4" />
         </div>
       </div>

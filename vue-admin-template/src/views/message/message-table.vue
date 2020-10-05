@@ -102,7 +102,8 @@ import {
   getReceiverMessage,
   readAll,
   deleteAll,
-  getMessageDetail
+  getMessageDetail,
+  getConsultDetail
 } from '@/api/common'
 export default {
   props: {
@@ -216,9 +217,23 @@ export default {
       })
     },
     goDetails(item) {
-      getMessageDetail(item.messageId).then(res => {
-        this.$router.push(`/desktop/detail?taskNo=${res.data.taskNo}`)
-      })
+      if (item.type === 'consult') {
+        getMessageDetail(item.messageId).then(res => {
+          getConsultDetail(res.data.consultId).then(res => {
+            this.$router.push(
+              `/consultation/detail?roomId=${
+                res.data.roomId
+              }&groupId=${window.encodeURIComponent(res.data.groupId)}&id=${
+                res.data.id
+              }`
+            )
+          })
+        })
+      } else {
+        getMessageDetail(item.messageId).then(res => {
+          this.$router.push(`/desktop/detail?taskNo=${res.data.taskNo}`)
+        })
+      }
     }
   },
   created() {

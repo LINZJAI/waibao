@@ -15,7 +15,8 @@ import {
   getReceiverMessage,
   ackAll,
   getMessageDetail,
-  getTaskDispatchDetail
+  getTaskDispatchDetail,
+  getConsultDetail
 } from '@/api/common'
 import Vue from 'vue'
 let timer
@@ -38,9 +39,18 @@ export default {
                 ackAll(messageRes.data.records.map(item => item.messageId))
               for (let i = 0; i < messageRes.data.records.length; i++) {
                 setTimeout(() => {
-                  // if (messageRes.data.records[i].type == 'consult') {
-                  // }
-                  if (
+                  if (messageRes.data.records[i].type == 'consult') {
+                    getMessageDetail(messageRes.data.records[i].messageId).then(
+                      res => {
+                        getConsultDetail(res.data.consultId).then(res => {
+                          this.postInfoMessage({
+                            ...messageRes.data.records[i],
+                            ...res.data
+                          })
+                        })
+                      }
+                    )
+                  } else if (
                     messageRes.data.records[i].subType == 'receive' ||
                     messageRes.data.records[i].subType == 'abnormal' ||
                     messageRes.data.records[i].subType == 'reject' ||

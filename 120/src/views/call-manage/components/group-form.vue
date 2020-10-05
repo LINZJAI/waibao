@@ -1,14 +1,14 @@
 <template>
   <div class="call-form">
     <el-form label-width="80px" size="mini">
-      <el-form-item label="事件等级：">
+      <!-- <el-form-item label="事件等级：">
         <el-radio-group v-model="formData.dangerLevel" size="mini">
           <el-radio label="一般事故">一般事故</el-radio>
           <el-radio label="较大事故">较大事故</el-radio>
           <el-radio label="重大事故">重大事故</el-radio>
           <el-radio label="特别重大事故">特别重大事故 </el-radio>
         </el-radio-group>
-      </el-form-item>
+      </el-form-item> -->
 
       <el-form-item label="指派医院：">
         <el-select v-model="formData.taskSend" size="mini">
@@ -39,6 +39,13 @@
           size="mini"
           id="thisLocal"
         ></el-input>
+      </el-form-item>
+      <el-form-item label="危重等级">
+        <el-select v-model="formData.dangerLevel" size="mini">
+          <el-option value="一般" label="一般"></el-option>
+          <el-option value="严重" label="严重"></el-option>
+          <el-option value="非常严重" label="非常严重"></el-option>
+        </el-select>
       </el-form-item>
     </el-form>
 

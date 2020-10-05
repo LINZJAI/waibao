@@ -7,14 +7,14 @@
       <div class="status" v-if="info.nodeName">{{ info.nodeName }}</div>
     </div>
     <div class="line"></div>
-    <div class="row">
+    <div class="map-row">
       <span class="key">司机：</span>
       <span class="value">
         {{ info.driverName }}
         {{ info.driverPhone }}
       </span>
     </div>
-    <div class="row">
+    <div class="map-row">
       <span class="key">随车：</span>
       <span class="value">
         {{
@@ -51,7 +51,7 @@
   margin: 10px 0;
 }
 
-.row {
+.map-row {
   font-size: 12px;
   margin-bottom: 5px;
   .key {

@@ -39,11 +39,11 @@
         :onclick="
           `window.app.$router.push('/consultation/detail?roomId=${
             this.info.roomId
-          }'&groupId=${window.encodeURIComponent(this.info.groupId)})&id=${
-            this.info.consultId
-          }`
+          }&groupId=${window.encodeURIComponent(this.info.groupId)}&id=${
+            this.info.id
+          }')`
         "
-        v-if="info.subType == 'apply'"
+        v-if="info.type == 'consult' && info.subType == 'apply'"
       >
         立即进入 >
       </div>
