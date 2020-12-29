@@ -10,16 +10,18 @@
     <div class="main-con">
       <div class="left-part">
         <div class="left-top-box">
-          <TitleBox title="120今日数据监测"><LeftTopBox></LeftTopBox></TitleBox>
+          <TitleBox title="120今日数据监测"
+            ><LeftTopBox :dataSource="userAndCarCount"></LeftTopBox
+          ></TitleBox>
         </div>
         <div class="left-mid-box">
-          <TitleBox title="今日急救任务（4）">
-            <LeftMidBox></LeftMidBox
+          <TitleBox :title="`今日急救任务（${list.length}）`">
+            <LeftMidBox :dataSource="list"></LeftMidBox
           ></TitleBox>
         </div>
         <div class="left-bottom-box">
-          <TitleBox title="今日急救列表（14）">
-            <LeftBottomBox></LeftBottomBox
+          <TitleBox :title="`今日急救列表（${detailList.length}）`">
+            <LeftBottomBox :dataSource="detailList"></LeftBottomBox
           ></TitleBox>
         </div>
       </div>
@@ -55,7 +57,7 @@
       <div class="right-part">
         <div class="right-top-box">
           <TitleBox title="120人数统计">
-            <RightTopBox></RightTopBox>
+            <RightTopBox :dataSource="count"></RightTopBox>
           </TitleBox>
         </div>
         <div class="right-mid-box">
@@ -65,7 +67,10 @@
         </div>
         <div class="right-bottom-box">
           <TitleBox title="急救人员统计">
-            <RightBottomBox></RightBottomBox>
+            <RightBottomBox
+              :dataSource="userCount"
+              :userDetails="userDetails"
+            ></RightBottomBox>
           </TitleBox>
         </div>
       </div>
@@ -207,6 +212,7 @@ import MidBottomRightBox from '../components/mid-bottom-right-box'
 import RightTopBox from '../components/right-top-box'
 import RightMidBox from '../components/right-mid-box'
 import RightBottomBox from '../components/right-bottom-box'
+import { userAndCar, patient, getListByDate } from '../api/big'
 export default {
   components: {
     TitleBox,
@@ -225,12 +231,34 @@ export default {
   props: {},
   data() {
     return {
-      time: ''
+      time: '',
+      userAndCarCount: {},
+      userCount: {},
+      userDetails: [],
+      count: {},
+      detailList: [],
+      list: []
     }
   },
   methods: {
     init() {
       this.time = moment().format('YYYY-MM-DD dddd HH:mm')
+
+      userAndCar().then(res => {
+        this.userAndCarCount = res.data.userAndCarCount
+        this.userCount = res.data.userCount
+        this.userDetails = res.data.userDetails
+      })
+      patient().then(res => {
+        this.count = res.data.count
+        this.detailList = res.data.detailList
+      })
+      getListByDate({
+        startDate: moment().format('YYYY-MM-DD'),
+        endDate: moment().format('YYYY-MM-DD')
+      }).then(res => {
+        this.list = res.data
+      })
     }
   },
   created() {

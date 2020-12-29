@@ -130,18 +130,51 @@
           <trInput
             :isEdit="isEdit"
             v-model="dataSource.eval.medicalHistoryProvider"
+            tag="select"
+            :dataSource="[
+              { value: '患者' },
+              { value: '亲友' },
+              { value: '他人' }
+            ]"
           ></trInput>
         </td>
       </tr>
       <tr>
-        <td class="label">主要病史</td>
+        <td class="label">既往史</td>
         <td colspan="5">
           <trInput
             :isEdit="isEdit"
             v-model="dataSource.eval.medicalHistory"
+            tag="select"
+            :dataSource="[
+              { value: '无' },
+              { value: '高血压' },
+              { value: '糖尿病' },
+              { value: '陈旧性脑梗死' },
+              { value: '心瓣膜疾病' },
+              { value: '非风湿性心房纤颤' },
+              { value: '冠心病' }
+            ]"
           ></trInput>
         </td>
       </tr>
+      <tr>
+        <td class="label">过敏史</td>
+        <td colspan="5">
+          <trInput
+            :isEdit="isEdit"
+            v-model="dataSource.eval.allergyHistory"
+            tag="autocomplete"
+            :dataSource="[
+              { value: '无' },
+              { value: '青霉素' },
+              { value: '头孢' },
+              { value: '其他' }
+            ]"
+          ></trInput>
+        </td>
+      </tr>
+
       <tr>
         <td class="label">体温</td>
         <td>
@@ -306,6 +339,7 @@
           </td>
         </tr>
       </template>
+
       <tr>
         <td colspan="4">
           <el-button
@@ -321,6 +355,42 @@
         <td>{{ allFeeCount }}</td>
       </tr>
       <tr>
+        <td colspan="6" class="label">院内准备</td>
+      </tr>
+      <tr>
+        <td class="label" colspan="2">分类</td>
+        <td class="label" colspan="2">项目名称</td>
+        <td class="label">数量</td>
+        <td class="label">单位</td>
+      </tr>
+      <tr
+        v-for="(item, index) in dataSource.prepareList"
+        :key="index"
+        class="fee-tr"
+      >
+        <td colspan="2">{{ item.groupName }}</td>
+        <td colspan="2">{{ item.itemName }}</td>
+        <td class="">
+          <trInput
+            type="number"
+            :isEdit="isEdit"
+            v-model="item.quantity"
+          ></trInput>
+        </td>
+        <td
+          >次
+          <i class="el-icon-close" @click="delYnzb(item)" v-if="isEdit"></i>
+        </td>
+      </tr>
+      <tr v-if="isEdit">
+        <td colspan="6">
+          <el-button type="primary" size="small" @click="addYnzb">
+            添加院内准备
+          </el-button>
+        </td>
+      </tr>
+
+      <tr>
         <td class="label">处理措施</td>
         <td colspan="2">
           <trInput
@@ -334,10 +404,23 @@
       <tr>
         <td class="label">院前病情归转</td>
         <td colspan="2">
-          <trInput
+          <span style="line-height: 32px;display: inline-block;">
+            {{ dataSource.transfer && dataSource.transfer.type }}
+          </span>
+
+          <!-- <trInput
             :isEdit="isEdit"
             v-model="dataSource.measure.diseaseOutcome"
-          ></trInput>
+          ></trInput> -->
+          <el-button
+            type="primary"
+            size="small"
+            @click="openAddGuizhuangModal"
+            style="float: right"
+            v-if="isEdit"
+          >
+            修改
+          </el-button>
         </td>
         <td class="label">出诊结果</td>
         <td colspan="2">
@@ -360,6 +443,9 @@
         <td>{{ dataSource.dispatchRecord.driverName }}</td>
       </tr>
     </table>
+
+    <addYnzbModal ref="addYnzbModal"></addYnzbModal>
+    <addGuizhuangModal ref="addGuizhuangModal"></addGuizhuangModal>
   </div>
 </template>
 <style lang="scss" scoped>
@@ -400,6 +486,8 @@
 </style>
 <script>
 import trInput from './tr-input'
+import addYnzbModal from '../modal/add-ynzb-modal'
+import addGuizhuangModal from '../modal/add-guizhuang-modal'
 export default {
   props: {
     isEdit: {
@@ -447,6 +535,10 @@ export default {
       let index = this.dataSource.fee.feeList.findIndex(o => o == item)
       this.dataSource.fee.feeList.splice(index, 1)
     },
+    delYnzb(item) {
+      let index = this.dataSource.prepareList.findIndex(o => o == item)
+      this.dataSource.prepareList.splice(index, 1)
+    },
     addYaoPing() {
       this.$prompt('药品名称', '添加药品', {
         confirmButtonText: '确定',
@@ -465,11 +557,32 @@ export default {
           })
         }
       })
+    },
+    addYnzb() {
+      this.$refs.addYnzbModal.open(formData => {
+        this.dataSource.prepareList.push({
+          groupName: formData.groupName,
+          itemName: formData.itemName,
+          itemCode: formData.itemCode,
+          quantity: '',
+          unit: '次'
+        })
+      })
+    },
+    openAddGuizhuangModal() {
+      this.$refs.addGuizhuangModal.open(
+        this.dataSource.transfer || {},
+        formData => {
+          Object.assign(this.dataSource.transfer, formData)
+        }
+      )
     }
   },
 
   components: {
-    trInput
+    trInput,
+    addYnzbModal,
+    addGuizhuangModal
   }
 }
 </script>

@@ -129,7 +129,7 @@ export default {
         return this.$message.warning('请输入地址!')
       }
       myGeo.getPoint(this.formData.eventLocation, point => {
-        if (point) {
+        if (point && !(point.lng === 116.413384 && point.lat === 39.910925)) {
           data.latitude = point.lat
           data.longitude = point.lng
           data.taskSendList = this.formData.taskSend
@@ -144,10 +144,16 @@ export default {
           data.eventTime = moment().format('YYYY-MM-DD HH:mm:ss')
           saveAndSend(data).then(res => {
             this.formData = JSON.parse(JSON.stringify(formData))
-            this.$refs.SuccessModal.open(
-              '急救任务已成功分配给指派医院，等待医院确认受理',
-              res.data.taskNo
-            )
+            /** 派单不成功 */
+            if (res.data.reminder) {
+              this.$message.warning(res.data.reminder)
+              this.$router.push(`/dispatch-detail?taskNo=${res.data.taskNo}`)
+            } else {
+              this.$refs.SuccessModal.open(
+                '急救任务已成功分配给指派医院，等待医院确认受理',
+                res.data.taskNo
+              )
+            }
           })
         } else {
           return this.$message.warning('您选择地址没有解析到结果!')

@@ -14,7 +14,6 @@ const name = '急救大屏' // page title
 // You can change the port by the following methods:
 // port = 9528 npm run dev OR npm run dev --port = 9528
 const port = process.env.port || process.env.npm_config_port || 9600 // dev port
-
 // All configuration item explanations can be find in https://cli.vuejs.org/config/
 module.exports = {
   /**
@@ -49,7 +48,8 @@ module.exports = {
     },
     proxy: {
       '/ems/api/': {
-        target: 'http://120.76.246.62:8080',
+        // target: 'http://120.76.246.62:8080',
+        target: 'https://llgx.xyz:8083',
         ws: true,
         changeOrigin: true
       }

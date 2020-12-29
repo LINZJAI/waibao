@@ -188,7 +188,7 @@ export default {
     init() {
       if (this.$route.query.status !== undefined) {
         this.status = this.$route.query.status || ''
-        this.date = [moment(), moment()]
+        this.date = [moment().subtract(1, 'M'), moment()]
         this.getData()
       } else {
         this.getData()

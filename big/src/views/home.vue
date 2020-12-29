@@ -16,7 +16,7 @@
             src="../assets/images/home/120调度中心.png"
             alt=""
             class=""
-            @click="openUrl('http://120.76.246.62:8080/emsDpct/#/')"
+            @click="openUrl('https://llgx.xyz:8083/emsDpct/#/')"
           />
         </div>
         <div class="top-two">
@@ -24,7 +24,7 @@
             src="../assets/images/home/院前管理平台.png"
             alt=""
             class=""
-            @click="openUrl('https://llgx.xyz/ems/#/')"
+            @click="openUrl('https://llgx.xyz:8083/ems/#/')"
           />
         </div>
         <div class="top-three">
@@ -59,7 +59,7 @@
           <img
             src="../assets/images/home/急救数据大屏.png"
             alt=""
-            @click="openUrl('http://120.76.246.62:8080/big/#/big')"
+            @click="openUrl('https://llgx.xyz:8083/big/#/big')"
           />
         </div>
         <div class="bottom-two">

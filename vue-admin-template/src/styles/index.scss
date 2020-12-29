@@ -17,6 +17,11 @@ label {
   font-weight: 700;
 }
 
+body label,
+body form {
+  margin-bottom: 0;
+}
+
 html {
   height: 100%;
   box-sizing: border-box;
@@ -176,7 +181,7 @@ div:focus {
     font-size: 13px;
     color: #555;
     align-items: center;
-    padding: 0 20px;
+    padding: 0 16px;
   }
 }
 
@@ -213,5 +218,123 @@ img[src="http://api0.map.bdimg.com/images/iw_close1d3.gif"] {
     // font-weight: bold;
     color: #cc2323;
     margin-bottom: 6px;
+  }
+}
+
+.pre-test-form {
+  .el-form-item__label {
+    font-size: 12px;
+    font-weight: normal;
+  }
+  .el-form-item__label {
+    padding-right: 0;
+  }
+  .el-input__inner,
+  .el-form-item__content,
+  .el-form-item__label,
+  .el-input__icon {
+    height: 19px;
+    line-height: 19px;
+    font-size: 12px;
+  }
+  .el-textarea__inner {
+    font-size: 12px;
+  }
+  .el-form-item {
+    margin-bottom: 4px;
+  }
+  .el-input__inner {
+    padding: 0 5px;
+  }
+  .el-input--prefix .el-input__inner {
+    padding-left: 30px;
+  }
+
+  .pre-test-form-row {
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    > .el-input {
+      width: 0;
+      flex: 1;
+    }
+    .el-select {
+      width: 0;
+      flex: 1;
+    }
+  }
+
+  .label,
+  .el-radio__label {
+    font-size: 12px;
+    color: #333;
+  }
+  .el-date-editor {
+    width: 100%;
+  }
+  .el-form--inline .el-form-item__content {
+    vertical-align: middle;
+  }
+  .el-form--inline .el-form-item {
+    margin-right: 5px;
+  }
+
+  .el-select {
+    width: 100%;
+  }
+}
+
+.pre-test-table {
+  font-size: 12px;
+  width: 100%;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  th {
+    background: #f5f5f5;
+    height: 24px;
+    border-bottom: 1px solid #ddd;
+  }
+  th,
+  td {
+    padding: 2px 10px;
+    vertical-align: middle;
+    border-right: 1px solid #ddd;
+  }
+  td {
+    height: 18px;
+  }
+  .tr-block td {
+    height: 6px;
+  }
+}
+
+.pre-test-btn {
+  font-size: 12px;
+  color: #333333;
+  height: 19px;
+  background: linear-gradient(180deg, #fcfcfc 0%, #e8e8e8 100%);
+  border-radius: 2px;
+  border: 1px solid #cecece;
+  padding: 0 10px;
+  margin-right: 6px;
+  img {
+    width: 10px;
+  }
+}
+
+.pre-test-popper {
+  &.el-autocomplete-suggestion li {
+    font-size: 12px;
+    height: 24px;
+    line-height: 24px;
+    padding: 0 15px;
+  }
+  .el-select-dropdown__item {
+    font-size: 12px;
+  }
+  .el-select-dropdown__item {
+    height: 24px;
+    line-height: 24px;
+    padding: 0 15px;
   }
 }

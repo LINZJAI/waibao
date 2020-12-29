@@ -1,0 +1,94 @@
+.record-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .el-dialog {
+    width: 800px;
+    margin-top: 0 !important;
+  }
+  .el-dialog__header {
+    padding: 0 19px;
+    height: 37px;
+    border-bottom: 1px solid #dfdfdf;
+    .el-dialog__title {
+      font-size: 13px;
+      color: #333;
+      font-weight: bold;
+      line-height: 37px;
+    }
+    .el-dialog__headerbtn {
+      top: 8px;
+    }
+  }
+  .el-dialog__body {
+    padding: 0;
+  }
+  .el-dialog__footer {
+    text-align: center;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid #dfdfdf;
+    padding: 0;
+    .el-button {
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+  }
+  .record-wrapper {
+    display: flex;
+    align-items: stretch;
+    .left-part {
+      width: 500px;
+      box-sizing: border-box;
+      padding: 15px;
+      background: #f5f5f5;
+      .record-form {
+        background: #ffffff;
+        border-radius: 4px;
+        border: 1px solid #cccccc;
+      }
+    }
+    .right-part {
+      flex: 1;
+      border-left: 1px solid #cccccc;
+      .record-table-wrapper {
+        height: 100%;
+        .record-table-title {
+          height: 34px;
+          line-height: 34px;
+          padding-left: 12px;
+          font-size: 12px;
+          color: #333;
+        }
+        .record-table-scroll {
+          height: calc(100% - 34px);
+          overflow: auto;
+          @include scrollBar;
+        }
+      }
+    }
+  }
+  .record-table {
+    font-size: 12px;
+    color: #333;
+    width: 100%;
+    text-align: center;
+    height: auto;
+    th {
+      height: 30px;
+      background: #f5f5f5;
+      border-top: 1px solid #cccccc;
+      border-bottom: 1px solid #cccccc;
+      border-right: 1px solid #cccccc;
+    }
+    tr th:last-child {
+      border-right: 0;
+    }
+    td {
+      border-bottom: 1px solid #eeeeee;
+      height: 30px;
+    }
+  }
+}

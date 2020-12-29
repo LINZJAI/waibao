@@ -8,18 +8,19 @@
 
 <script>
 export default {
-  name: "AppMain",
+  name: 'AppMain',
   computed: {
     key() {
-      return this.$route.path;
+      return this.$route.path
     }
   }
-};
+}
 </script>
 
 <style scoped>
 .app-main {
   height: 100%;
   overflow: auto;
+  background: #f5f5f5;
 }
 </style>

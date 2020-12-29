@@ -26,7 +26,7 @@
         > -->
       </div>
       <call-layer ref="callLayer" class="chat-wrapper" />
-      <!-- <image-previewer /> -->
+      <image-previewer />
     </div>
     <div class="bg"> </div>
   </div>
@@ -400,7 +400,7 @@ export default {
   mounted() {
     // 初始化监听器
     this.initListener()
-    const userID = this.$store.state.baseUser.userInfo.empName
+    const userID = this.$store.state.baseUser.userInfo.empNo
     const groupID = this.$route.query.groupId
     if (!groupID) return
     this.tim

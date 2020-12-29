@@ -1,3 +1,18 @@
 @function vw($px) {
   @return $px / 1920 * 100vw;
 }
+
+@mixin scrollBar {
+  &::-webkit-scrollbar-track-piece {
+    background: #d3dce6;
+  }
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #99a9bf;
+    border-radius: 20px;
+  }
+}

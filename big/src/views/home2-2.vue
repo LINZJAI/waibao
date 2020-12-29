@@ -24,7 +24,7 @@
             src="../assets/images/home2-2/院前管理平台.png"
             alt=""
             class=""
-            @click="openUrl('https://llgx.xyz/ems/#/')"
+            @click="openUrl('https://llgx.xyz:8083/ems/#/')"
           />
         </div>
         <div class="top-three">

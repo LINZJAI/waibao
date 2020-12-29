@@ -1,15 +1,21 @@
 <template>
   <div class="box-content">
     <div class="info-box">
-      <div class="text">12<span class="uniq">人</span></div>
+      <div class="text"
+        >{{ dataSource.visitUserSize }}<span class="uniq">人</span></div
+      >
       <div class="aside">今日出诊</div>
     </div>
     <div class="info-box">
-      <div class="text">8<span class="uniq">辆</span></div>
+      <div class="text"
+        >{{ dataSource.visitCarSize }}<span class="uniq">辆</span></div
+      >
       <div class="aside">已派车辆</div>
     </div>
     <div class="info-box">
-      <div class="text">3<span class="uniq">辆</span></div>
+      <div class="text"
+        >{{ dataSource.waitCarSize }}<span class="uniq">辆</span></div
+      >
       <div class="aside">待命车辆</div>
     </div>
   </div>
@@ -47,11 +53,17 @@
 </style>
 <script>
 export default {
-  props: {},
+  props: {
+    dataSource: {
+      type: Object,
+      default: () => ({})
+    }
+  },
   data() {
     return {}
   },
   methods: {},
+  created() {},
   components: {}
 }
 </script>

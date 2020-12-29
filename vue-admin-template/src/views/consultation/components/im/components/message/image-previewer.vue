@@ -1,9 +1,13 @@
 <template>
-  <div class="image-previewer-wrapper" v-show="showPreviewer" @mousewheel="handleMouseWheel">
+  <div
+    class="image-previewer-wrapper"
+    v-show="showPreviewer"
+    @mousewheel="handleMouseWheel"
+  >
     <div class="image-wrapper">
       <img
         class="image-preview"
-        :style="{transform: `scale(${zoom}) rotate(${rotate}deg)`}"
+        :style="{ transform: `scale(${zoom}) rotate(${rotate}deg)` }"
         :src="previewUrl"
         @click="close"
       />
@@ -16,7 +20,9 @@
       <i class="el-icon-zoom-in" @click="zoomIn"></i>
       <i class="el-icon-refresh-left" @click="rotateLeft"></i>
       <i class="el-icon-refresh-right" @click="rotateRight"></i>
-      <span class="image-counter">{{index+1}} / {{imgUrlList.length}}</span>
+      <span class="image-counter"
+        >{{ index + 1 }} / {{ imgUrlList.length }}</span
+      >
     </div>
   </div>
 </template>

@@ -5,6 +5,7 @@
     <router-link class="nav-item" to="/desktop/index">工作台</router-link>
     <router-link class="nav-item" to="/patient">急救记录</router-link>
     <router-link class="nav-item" to="/consultation">远程会诊</router-link>
+    <router-link class="nav-item" to="/pre-test">预检分诊</router-link>
     <!-- <div class="nav-item">远程会诊</div>
     <div class="nav-item">培训教育</div> -->
     <div class="block"></div>

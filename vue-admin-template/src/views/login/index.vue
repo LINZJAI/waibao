@@ -50,8 +50,8 @@
             v-model="his"
           >
             <el-option
-              :value="'古县人民医院'"
-              :label="'古县人民医院'"
+              :value="'钦州第二人民医院'"
+              :label="'钦州第二人民医院'"
             ></el-option>
           </el-select>
           <el-input
@@ -212,7 +212,7 @@ export default {
       tabIndex: 1,
       empNo: 'admin',
       password: '123456',
-      his: '古县人民医院'
+      his: '钦州第二人民医院'
     }
   },
   methods: {

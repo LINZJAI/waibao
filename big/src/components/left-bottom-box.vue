@@ -8,12 +8,12 @@
         <th>年龄</th>
         <th>状态</th>
       </tr>
-      <tr v-for="(item, index) in tableData" :key="index">
-        <td>{{ item.车牌号 }}</td>
-        <td>{{ item.姓名 }}</td>
-        <td>{{ item.性别 }}</td>
-        <td>{{ item.年龄 }}</td>
-        <td>{{ item.年龄 }}</td>
+      <tr v-for="(item, index) in dataSource" :key="index">
+        <td>{{ item.carNo }}</td>
+        <td>{{ item.patientName }}</td>
+        <td>{{ item.sex }}</td>
+        <td>{{ item.age }}</td>
+        <td>{{ item.nodeName }}</td>
       </tr>
     </table>
   </div>
@@ -49,44 +49,49 @@
 </style>
 <script>
 export default {
-  props: {},
+  props: {
+    dataSource: {
+      type: Array,
+      default: () => []
+    }
+  },
   data() {
     return {
       tableData: [
         {
-          车牌号: '桂A0001',
+          车牌号: '桂NHH799',
           姓名: '邹驳帝',
           性别: '男',
           年龄: '20',
-          状态: '出诊中'
+          状态: '出诊'
         },
         {
-          车牌号: '桂A0002',
+          车牌号: '桂NJS172',
           姓名: '易晓莉',
           性别: '女',
           年龄: '15',
           状态: '等待派车'
         },
         {
-          车牌号: '桂A0003',
+          车牌号: '桂NNK3953',
           姓名: '夏山',
           性别: '男',
           年龄: '55',
-          状态: '出诊中'
+          状态: '出诊'
         },
         {
-          车牌号: '桂A0004',
+          车牌号: '桂NU9573',
           姓名: '郑涛涛',
           性别: '男',
           年龄: '37',
-          状态: '出诊中'
+          状态: '出诊'
         },
         {
-          车牌号: '桂A0005',
+          车牌号: '桂N93181',
           姓名: '李晓东',
           性别: '男',
           年龄: '37',
-          状态: '出诊中'
+          状态: '出诊'
         }
       ]
     }

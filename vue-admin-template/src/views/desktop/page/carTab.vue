@@ -100,12 +100,12 @@
             @click="activeTab = 3"
             >院前病历</div
           >
-          <!-- <div
+          <div
             class="tab-item"
             :class="{ active: activeTab === 4 }"
             @click="activeTab = 4"
             >心电数据</div
-          > -->
+          >
         </div>
         <div class="content">
           <Map v-if="activeTab === 1"></Map>
@@ -114,11 +114,130 @@
             src="../../consultation/images/心电动图.gif"
             v-if="activeTab === 2"
           />
+
           <CarTabRecode
             v-if="activeTab === 3 && taskInfo.taskNo"
             :taskNo="taskInfo.taskNo"
           ></CarTabRecode>
-          <XDT v-show="activeTab === 4" />
+          <!-- <XDT v-show="activeTab === 4" /> -->
+          <div class="main-bottom-left-part" v-if="activeTab === 4">
+            <table>
+              <colgroup>
+                <col width="50%" />
+                <col width="50%" />
+              </colgroup>
+              <tr>
+                <th>项目</th>
+
+                <th>值</th>
+              </tr>
+              <tr>
+                <td>舒张压/收缩压</td>
+
+                <td
+                  >{{ LastRecordMap.NDBP || '--' }}/{{
+                    LastRecordMap.NSBP || '--'
+                  }}(mmHg)</td
+                >
+              </tr>
+              <tr>
+                <td>体温</td>
+                <td>{{ LastRecordMap.T || '--' }}℃</td>
+              </tr>
+              <tr>
+                <td>心率</td>
+                <td>{{ LastRecordMap.HR || '--' }}次/分</td>
+              </tr>
+              <tr>
+                <td>血氧饱和度</td>
+                <td>{{ LastRecordMap.SPO2 || '--' }}%</td>
+              </tr>
+              <tr>
+                <td>呼吸频率</td>
+                <td>{{ LastRecordMap.RR || '--' }}次/分</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+              </tr>
+            </table>
+          </div>
         </div>
       </div>
       <div class="right-part">
@@ -128,7 +247,7 @@
             <Im v-if="initEd"></Im>
           </div>
           <div class="video-con">
-            <Video v-if="initEd"></Video>
+            <Video v-if="initEd" :videoMonitorCode="videoMonitorCode"></Video>
             <div class="null-video"></div>
           </div>
         </div>
@@ -353,7 +472,7 @@
         }
       }
     }
-    .isCar-video-box {
+    /* .isCar-video-box {
       position: fixed !important;
       z-index: 2;
       padding: 0 !important;
@@ -367,9 +486,57 @@
         object-fit: cover !important;
         background: url('../../consultation/images/连接中.png');
       }
+    } */
+
+    #rtmp_video_A_Flash_api {
+      position: fixed !important;
+      z-index: 2;
+      padding: 0 !important;
+      right: 12px;
+      top: 310px;
+      width: calc((100vw - 300px - 24px) * 4 / 7 * 3 / 5);
+      height: calc((100vh - 50px - 24px - 96px - 12px - 90px - 50px) / 2);
     }
     .current-conversation-wrapper {
       height: calc(100vh - 312px) !important;
+    }
+  }
+
+  .main-bottom-left-part {
+    width: 100%;
+    height: 100%;
+    background: url('../../consultation/images/心电动图.gif');
+    /* background: url('./images/连接中.png'); */
+    /* background: url('./images/检测数据.png'); */
+    /* background: #000; */
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+    table {
+      width: 190px;
+      font-size: 12px;
+      color: #fff;
+      border-collapse: collapse;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      background: #000;
+      td,
+      th {
+        text-align: left;
+        padding-left: 10px;
+        height: 34px;
+        border-bottom: 1px solid #2a3b61;
+      }
+      tr {
+        &:nth-of-type(2n) {
+          background: rgba(38, 57, 140, 0.24);
+        }
+      }
+      th {
+        color: #8cbbff;
+      }
     }
   }
 }
@@ -378,10 +545,11 @@
 import Map from './map'
 import Im from '../../consultation/components/im/index'
 import Video from '../../consultation/components/video/index'
-import { getConsultDetailForCarNo } from '@/api/common'
+import { getConsultDetailForCarNo, getLastRecordList } from '@/api/common'
 import moment from 'moment'
 import CarTabRecode from '../components/carTab-recode'
 import XDT from '../components/心电图/index'
+let timer = null
 export default {
   props: {},
   data() {
@@ -430,14 +598,23 @@ export default {
       groupId: '',
       nodeName: '',
       doctorList: [],
-      nurseList: []
+      nurseList: [],
+      LastRecordMap: {},
+      videoMonitorCode: ''
+    }
+  },
+  watch: {
+    '$route.query.carNo'() {
+      this.init()
     }
   },
   methods: {
     init() {
       this.initEd = false
       getConsultDetailForCarNo(this.$route.query.carNo).then(res => {
+        if (!res || !res.data) return
         this.taskInfo = res.data.task
+        this.videoMonitorCode = res.data.videoMonitorCode
         this.nodeName = res.data.nodeName
         this.doctorList = res.data.doctorList
         this.nurseList = res.data.nurseList
@@ -462,17 +639,30 @@ export default {
           }
         })
         this.initEd = true
+
+        let fun = () => {
+          getLastRecordList(res.data.dispatchId).then(res => {
+            let LastRecordMap = {}
+            res.data.sort(
+              (a, b) => moment(a.monitoringTime) - moment(b.monitoringTime)
+            )
+            for (let i = 0; i < res.data.length; i++) {
+              LastRecordMap[res.data[i].englishForshort] =
+                res.data[i].originalResult
+            }
+            this.LastRecordMap = LastRecordMap
+          })
+        }
+        clearInterval(timer)
+        fun()
+        timer = setInterval(fun, 10000)
       })
     }
   },
   created() {
     this.init()
   },
-  watch: {
-    $route() {
-      this.init()
-    }
-  },
+
   components: { Map, Im, Video, CarTabRecode, XDT }
 }
 </script>

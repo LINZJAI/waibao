@@ -56,18 +56,18 @@
                   <th>性别</th>
                   <th>年龄</th>
                   <th>身份</th>
-                  <th>操作</th>
+                  <!-- <th>操作</th> -->
                 </tr>
                 <tr>
                   <td>{{ info.patientName }}</td>
                   <td>{{ info.sex }}</td>
                   <td>{{ info.age }}岁</td>
                   <td>{{ info.personDesc }}</td>
-                  <td>
+                  <!-- <td>
                     <el-button type="text" size="mini" @click="openUrl"
                       >查看档案</el-button
                     >
-                  </td>
+                  </td> -->
                 </tr>
               </table>
             </div>
@@ -87,11 +87,12 @@
           <table class="info-table" style="width: 800px; margin-top: 20px">
             <colgroup>
               <col width="50px" />
-              <col width="100px" />
-              <col width="70px" />
-              <col width="140px" />
+              <col width="120px" />
+              <col width="80px" />
+              <col width="180px" />
               <col width="100px" />
               <col width="120px" />
+              <col width="300px" />
               <col width="80px" />
             </colgroup>
             <tr>
@@ -101,6 +102,7 @@
               <th>调度时间</th>
               <th>状态</th>
               <th>备注</th>
+              <th>错误信息</th>
               <th>操作</th>
             </tr>
             <tr v-for="(item, index) in info.taskSendList" :key="index">
@@ -110,12 +112,20 @@
               <td>{{ item.dispatchTime }}</td>
               <td>{{ statusMap[item.status] }}</td>
               <td>{{ item.remake }}</td>
+              <td>{{ item.status == '0' ? item.errorMessage : '' }}</td>
               <td>
+                <el-button
+                  @click="reDispatch(item)"
+                  type="text"
+                  size="small"
+                  v-if="item.status == '0'"
+                  >重新发送</el-button
+                >
                 <el-button
                   @click="cancel(item)"
                   type="text"
                   size="small"
-                  v-if="item.status !== '-2'"
+                  v-else-if="item.status !== '-2'"
                   >取消</el-button
                 >
               </td>
@@ -153,6 +163,7 @@
       .info-table {
         td {
           text-align: center;
+          word-break: break-all;
         }
       }
     }
@@ -173,7 +184,7 @@
 }
 </style>
 <script>
-import { getDetail, cancelEmergTask } from '@/api/api'
+import { getDetail, cancelEmergTask, reDispatch } from '@/api/api'
 import AddHisModal from './modal/add-his-modal'
 export default {
   props: {},
@@ -200,6 +211,17 @@ export default {
           reason: value
         }).then(res => {
           this.$message.success('取消成功')
+          this.init()
+        })
+      })
+    },
+    reDispatch(item) {
+      this.$confirm('确定是重新发送该急救任务？', '温馨提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消'
+      }).then(() => {
+        reDispatch(item.subTaskNo).then(res => {
+          this.$message.success('重新发送成功')
           this.init()
         })
       })

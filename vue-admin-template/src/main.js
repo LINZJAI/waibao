@@ -53,6 +53,21 @@ Vue.use(ElementUI, { locale })
 
 Vue.config.productionTip = false
 Vue.mixin(commonMixin)
+
+Vue.directive('loadmore', {
+  bind(el, binding) {
+    console.log(el, 'el')
+    // 获取element-ui定义好的scroll盒子
+    const SELECTWRAP_DOM = el.querySelector('.el-select-dropdown__wrap')
+    SELECTWRAP_DOM.addEventListener('scroll', function() {
+      const CONDITION = this.scrollHeight - this.scrollTop <= this.clientHeight
+      if (CONDITION) {
+        binding.value()
+      }
+    })
+  }
+})
+
 window.app = new Vue({
   el: '#app',
 

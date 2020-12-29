@@ -2,19 +2,27 @@
   <div class="box-content">
     <div class="top-con">
       <div class="top-box">
-        <div class="text-1 color-1">15 <span class="uniq">人</span></div>
+        <div class="text-1 color-1"
+          >{{ dataSource.doctor }} <span class="uniq">人</span></div
+        >
         <div class="text-2">医生</div>
       </div>
       <div class="top-box">
-        <div class="text-1 color-2">35<span class="uniq">人</span></div>
+        <div class="text-1 color-2"
+          >{{ dataSource.nurse }}<span class="uniq">人</span></div
+        >
         <div class="text-2">护士</div>
       </div>
       <div class="top-box">
-        <div class="text-1 color-3">8<span class="uniq">人</span></div>
+        <div class="text-1 color-3"
+          >{{ dataSource.driver }} <span class="uniq">人</span></div
+        >
         <div class="text-2">司机</div>
       </div>
       <div class="top-box">
-        <div class="text-1 color-4">12<span class="uniq">人</span></div>
+        <div class="text-1 color-4">
+          {{ dataSource.dispatcher }} <span class="uniq">人</span></div
+        >
         <div class="text-2">调度员</div>
       </div>
     </div>
@@ -26,11 +34,13 @@
           <th>车辆</th>
           <th>状态</th>
         </tr>
-        <tr v-for="(item, index) in tableData" :key="index">
-          <td>{{ item.岗位 }}</td>
-          <td>{{ item.姓名 }}</td>
-          <td>{{ item.车辆 }}</td>
-          <td :class="{ red: item.状态 == '出诊中' }">{{ item.状态 }}</td>
+        <tr v-for="(item, index) in userDetails" :key="index">
+          <td>{{ userTypeMap[item.userType] }}</td>
+          <td>{{ item.empName }}</td>
+          <td>{{ item.carNo }}</td>
+          <td :class="{ red: item.taskStatusName == '出诊中' }">{{
+            item.taskStatusName
+          }}</td>
         </tr>
       </table>
     </div>
@@ -108,44 +118,59 @@
 </style>
 <script>
 export default {
-  props: {},
+  props: {
+    dataSource: {
+      type: Object,
+      default: () => ({})
+    },
+    userDetails: {
+      type: Array,
+      default: () => []
+    }
+  },
   data() {
     return {
+      userTypeMap: {
+        doctor: '医生',
+        nurse: '护士',
+        driver: '司机',
+        dispatcher: '调度员'
+      },
       tableData: [
         {
           岗位: '医生',
-          姓名: '萧惑勉（神内科）',
-          车辆: '粤A0001',
+          姓名: '吴武信',
+          车辆: '桂N93180',
           状态: '出诊中'
         },
         {
           岗位: '医生',
-          姓名: '刘皓（心内科）',
+          姓名: '赖天福',
           车辆: '',
           状态: '站内待命'
         },
         {
           岗位: '护士',
-          姓名: '汤代修',
-          车辆: '粤A0002',
+          姓名: '苏全瑞',
+          车辆: '桂N93181',
           状态: '出诊中'
         },
         {
           岗位: '护士',
-          姓名: '武小双',
-          车辆: '粤A0003',
+          姓名: '潘科',
+          车辆: '桂NJS172',
           状态: '出诊中'
         },
         {
           岗位: '司机',
-          姓名: '汤蕾',
-          车辆: '粤A0004',
+          姓名: '钟秀青',
+          车辆: '桂NA8688',
           状态: '出诊中'
         },
         {
           岗位: '医生',
-          姓名: '朱小双（全科）',
-          车辆: '粤A0005',
+          姓名: '黄文瑞',
+          车辆: '桂NA8693',
           状态: '出诊中'
         }
         // {

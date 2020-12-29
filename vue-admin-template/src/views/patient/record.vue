@@ -10,11 +10,15 @@
         </div> -->
       </div>
       <div class="tree-content">
-        <evalList :configList="patientList" :infoId="infoId"></evalList>
+        <evalList
+          :configList="patientList"
+          :infoId="infoId"
+          ref="evalList"
+        ></evalList>
         <!-- <BaseTree :configList="patientList" :infoId="infoId"></BaseTree> -->
       </div>
     </div>
-    <div class="right-con">
+    <div class="right-con" v-if="currentPatient">
       <div class="tool" v-if="currentPatient">
         <el-button size="mini" @click="$router.back()">返回</el-button>
         <el-button size="mini" v-if="isEdit" @click="onSave">保存</el-button>
@@ -31,6 +35,29 @@
           :dataSource="currentPatient"
           :isEdit="isEdit"
         ></PatientInfo>
+      </div>
+    </div>
+    <div class="right-con" v-if="currentEval">
+      <div class="tool">
+        <el-button size="mini" @click="$router.back()">返回</el-button>
+        <el-button size="mini" v-if="isEdit" @click="onEvalSave"
+          >保存</el-button
+        >
+        <el-button size="mini" v-else @click="isEdit = true">修改</el-button>
+        <el-button size="mini" v-if="isEdit" @click="isEdit = false"
+          >取消</el-button
+        >
+        <el-button size="mini" @click="print">打印</el-button>
+      </div>
+      <div class="content">
+        <span :class="{ readOnly: !isEdit }">
+          <component
+            :is="currentEval.component"
+            ref="evalForm"
+            :infoId="infoId"
+            :patientName="patientName"
+          ></component>
+        </span>
       </div>
     </div>
   </div>
@@ -88,6 +115,10 @@
     }
   }
 }
+
+.readOnly {
+  pointer-events: none;
+}
 </style>
 <script>
 import BaseTree from './components/baseTree'
@@ -100,9 +131,12 @@ export default {
   data() {
     return {
       currentPatient: null,
+      currentEval: null,
       infoId: null,
       patientList: [],
-      isEdit: false
+      isEdit: false,
+      infoId: '',
+      patientName: ''
     }
   },
   methods: {
@@ -125,11 +159,13 @@ export default {
     },
     selectPatient(patient) {
       this.currentPatient = patient
+      this.currentEval = null
       this.infoId = this.currentPatient.info.infoId
+      this.$refs.evalList.$refs.tree.setCurrentKey(null)
     },
     onSave() {
-      this.isEdit = false
       saveOrUpdateInfo(this.currentPatient).then(res => {
+        this.isEdit = false
         this.$message.success('修改成功')
         this.refresh()
       })
@@ -155,10 +191,19 @@ export default {
           }
         `
       })
+    },
+
+    onEvalSave() {
+      this.$refs.evalForm.save().then(res => {
+        this.$message.success('保存成功')
+        this.isEdit = false
+      })
     }
   },
   created() {
     this.init().then(res => {
+      this.infoId = res && res[0] && res[0].info.infoId
+      this.patientName = res && res[0] && res[0].info.patientName
       res && res[0] && this.selectPatient(res[0])
     })
   },

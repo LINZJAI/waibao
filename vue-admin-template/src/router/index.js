@@ -98,6 +98,22 @@ export const constantRoutes = [
       {
         path: '/consultation/detail',
         component: () => import('@/views/consultation/detail')
+      },
+      {
+        path: '/pre-test',
+        component: () => import('@/views/pre-test/index')
+      },
+      {
+        path: '/pre-test/add',
+        component: () => import('@/views/pre-test/add')
+      },
+      {
+        path: '/pre-test/edit',
+        component: () => import('@/views/pre-test/add')
+      },
+      {
+        path: '/pre-test/report',
+        component: () => import('@/views/pre-test/report')
       }
     ]
   },

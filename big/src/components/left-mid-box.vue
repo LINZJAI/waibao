@@ -1,6 +1,11 @@
 <template>
-  <div class="box-content">
-    <div class="info-box" v-for="item in list" :key="item" @click="openUrl">
+  <div class="box-content" :class="{ inScroll: dataSource.length > 3 }">
+    <div
+      class="info-box"
+      v-for="item in dataSource"
+      :key="item"
+      @click="openUrl(item)"
+    >
       <div class="arrow one"></div>
       <div class="arrow two"></div>
       <div class="arrow three"></div>
@@ -8,25 +13,28 @@
 
       <div class="top-text">
         <img src="../assets/images/急救车.png" class="jjc" alt="" />
-        <span>{{ item.text1 }}</span>
+        <span>{{ item.carNo }}</span>
       </div>
       <div class="mid-text">
-        <span>{{ item.text2 }}</span>
+        <span
+          >{{ item.patientName }} {{ item.task.sex }} {{ item.task.age }}岁
+          {{ item.task.complaints }}</span
+        >
       </div>
 
       <div class="bottom-con">
-        <div class="row-1">{{ item.text3 }}</div>
+        <div class="row-1">{{ item.task.eventLocation }}</div>
         <div class="row-2">
-          <span class="car">{{ item.text4 }} </span>
-          <span>{{ item.text5 }}</span>
+          <span class="car">{{ item.nodeName }} </span>
+          <span>{{ item.dispatchTime }}</span>
           <img src="../assets/images/定位和状态.png" alt="" class="img-1" />
         </div>
       </div>
 
       <div class="label-con">
-        <div class="text-1">{{ item.text6 }}</div>
-        <div class="text-2">{{ item.text7 }}</div>
-        <div class="text-3">{{ item.text8 }}</div>
+        <div class="text-1">{{ moment(item.eventTime).format('HH:mm') }}</div>
+        <div class="text-2"> 到达{{ item.text7 }}</div>
+        <!-- <div class="text-3"> 7.7公里{{ item.text8 }}</div> -->
       </div>
     </div>
   </div>
@@ -36,12 +44,19 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  overflow: auto;
+  @include scrollBar;
+  &.inScroll {
+    margin-right: vw(-18);
+    padding-right: vw(5);
+  }
 }
 
 .info-box {
   cursor: pointer;
   position: relative;
-  flex: 1;
+  /* flex: 1; */
+  height: 21%;
   margin-bottom: vw(5);
   background: linear-gradient(
     180deg,
@@ -135,58 +150,24 @@
 }
 </style>
 <script>
+import moment from 'moment'
 export default {
-  props: {},
+  props: {
+    dataSource: {
+      type: Array,
+      default: () => []
+    }
+  },
   data() {
     return {
-      list: [
-        {
-          text1: '桂A9837',
-          text2: '陈小民 男 28岁，心律不齐',
-          text3: '南宁市西乡塘区大学东路73号',
-          text4: '正在派车',
-          text5: '2020-08-26 11:21:23',
-          text6: '到达13:32',
-          text7: '36分',
-          text8: '8.7公里'
-        },
-        {
-          text1: '桂A4382',
-          text2: '刘星云 男 24岁，右头部疼痛',
-          text3: '南宁市镇江市丹徒区幸福胡同422号',
-          text4: '正在派车',
-          text5: '2020-08-26 14:31:12',
-          text6: '到达15:12',
-          text7: '31分',
-          text8: '6.3公里'
-        },
-        {
-          text1: '桂A7273',
-          text2: '林小远 男 25岁，血压偏高',
-          text3: '南宁市青秀区凤岭南路6-6号',
-          text4: '正在派车',
-          text5: '2020-08-26 11:21:36',
-          text6: '到达13:33',
-          text7: '34分',
-          text8: '5.7公里'
-        },
-        {
-          text1: '桂A7363',
-          text2: '徐大博 男 32岁，肾结石',
-          text3: '南宁市邕宁区龙亭路8号',
-          text4: '正在派车',
-          text5: '2020-08-26 16:42:43',
-          text6: '到达17:14',
-          text7: '43分',
-          text8: '9.7公里'
-        }
-      ]
+      list: []
     }
   },
   methods: {
-    openUrl() {
+    moment,
+    openUrl(item) {
       window.open(
-        'https://llgx.xyz/ems/#/desktop/detail?taskNo=EMS200802172746001'
+        `https://llgx.xyz:8083/ems/#/desktop/detail?taskNo=${item.taskNo}`
       )
     }
   },

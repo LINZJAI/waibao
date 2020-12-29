@@ -51,3 +51,10 @@ export function cancelEmergTask(query) {
     data: query
   })
 }
+/** 重新派单 */
+export function reDispatch(subTaskNo) {
+  return request({
+    url: `/emergTask/reDispatch/${subTaskNo}`,
+    method: 'get'
+  })
+}

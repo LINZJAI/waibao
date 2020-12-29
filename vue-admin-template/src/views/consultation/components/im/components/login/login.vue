@@ -16,7 +16,7 @@
     </el-select>
     <br />
     <el-button type="primary" @click="login" style="width:100%;"
-      >登123213录</el-button
+      >登录</el-button
     >
   </div>
 </template>

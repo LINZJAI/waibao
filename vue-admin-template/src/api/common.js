@@ -211,3 +211,38 @@ export function getPatientDetail(patientId) {
     method: 'get'
   })
 }
+
+export function patient_prepare_list(groupName) {
+  return request({
+    url: `/common/desc/patient_prepare/list`,
+    method: 'post',
+    data: {
+      groupName
+    }
+  })
+}
+
+export function patient_prepare_typeList() {
+  return request({
+    url: `/common/desc/patient_prepare/typeList`,
+    method: 'get'
+  })
+}
+export function getLastRecordList(dispatchId) {
+  return request({
+    url: `/ops/monitor-item-result/getLastRecordList/${dispatchId}`,
+    method: 'get'
+  })
+}
+export function getDescPage(dictCode, groupName, current, keyword) {
+  return request({
+    url: `/common/desc/${dictCode}/getPage`,
+    method: 'post',
+    data: {
+      current,
+      size: 10,
+      groupName,
+      keyword
+    }
+  })
+}

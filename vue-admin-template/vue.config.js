@@ -55,8 +55,9 @@ module.exports = {
     },
     proxy: {
       '/ems/api/': {
-        target: 'https://emgs.utools.club',
+        // target: 'https://emgs.utools.club',
         // target: 'http://120.76.246.62:8080',
+        target: 'https://llgx.xyz:8083',
         ws: true,
         changeOrigin: true
       }

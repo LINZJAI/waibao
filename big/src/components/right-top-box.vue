@@ -3,21 +3,27 @@
     <div class="info-box">
       <img src="../assets/images/总数.png" alt="" />
       <div class="text-con">
-        <div class="text-1">274 <span class="uniq">人</span></div>
+        <div class="text-1"
+          >{{ dataSource.total }} <span class="uniq">人</span></div
+        >
         <div class="text-2">总数</div>
       </div>
     </div>
     <div class="info-box">
       <img src="../assets/images/女性.png" alt="" />
       <div class="text-con">
-        <div class="text-1">67 <span class="uniq">人</span></div>
+        <div class="text-1"
+          >{{ dataSource.womenSize }} <span class="uniq">人</span></div
+        >
         <div class="text-2">女性</div>
       </div>
     </div>
     <div class="info-box">
       <img src="../assets/images/男性.png" alt="" />
       <div class="text-con">
-        <div class="text-1">207 <span class="uniq">人</span></div>
+        <div class="text-1"
+          >{{ dataSource.menSize }} <span class="uniq">人</span></div
+        >
         <div class="text-2">男性</div>
       </div>
     </div>
@@ -52,7 +58,12 @@
 </style>
 <script>
 export default {
-  props: {},
+  props: {
+    dataSource: {
+      type: Object,
+      default: () => ({})
+    }
+  },
   data() {
     return {}
   },

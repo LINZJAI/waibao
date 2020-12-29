@@ -10,7 +10,11 @@
         </div> -->
       </div>
       <div class="tree-content">
-        <evalList :configList="patientList" :infoId="infoId"></evalList>
+        <evalList
+          :configList="patientList"
+          :infoId="infoId"
+          :isModal="true"
+        ></evalList>
         <!-- <BaseTree :configList="patientList" :infoId="infoId"></BaseTree> -->
       </div>
     </div>
@@ -22,15 +26,6 @@
       :close-on-click-modal="true"
     >
       <div class="right-con">
-        <!-- <div class="tool" v-if="currentPatient">
-          <el-button size="mini" @click="$router.back()">返回</el-button>
-          <el-button size="mini" v-if="isEdit" @click="onSave">保存</el-button>
-          <el-button size="mini" v-else @click="isEdit = true">修改</el-button>
-          <el-button size="mini" v-if="isEdit" @click="isEdit = false"
-            >取消</el-button
-          >
-          <el-button size="mini" @click="print">打印</el-button>
-        </div> -->
         <div class="content">
           <PatientInfo
             ref="printable"
@@ -127,6 +122,10 @@ export default {
     init() {
       let taskNo = this.taskNo
       return getListByTaskNo(taskNo).then(res => {
+        try {
+          this.infoId = res.data[0].info.infoId
+        } catch (error) {}
+
         this.patientList = res.data.map(item => {
           item.measure = item.measure || {}
           item.eval = item.eval || {}

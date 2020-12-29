@@ -1,5 +1,9 @@
 <template>
   <div class="video-wrapper">
+    <rtmpVideo
+      :videoMonitorCode="videoMonitorCode"
+      v-if="videoMonitorCode"
+    ></rtmpVideo>
     <!-- 聊天室页面 -->
     <div>
       <div>
@@ -52,8 +56,14 @@
 </style>
 <script>
 import Presetting from './js/presetting'
+import rtmpVideo from './rtmp-video'
 export default {
-  props: {},
+  props: {
+    videoMonitorCode: {
+      type: String,
+      default: ''
+    }
+  },
   data() {
     return {}
   },
@@ -127,6 +137,8 @@ export default {
       })
     })
   },
-  components: {}
+  components: {
+    rtmpVideo
+  }
 }
 </script>

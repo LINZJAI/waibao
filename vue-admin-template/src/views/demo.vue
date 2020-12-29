@@ -42,41 +42,41 @@ export default {
     return {
       list: [
         {
-          name: "登录页",
-          path: "/login"
+          name: '登录页',
+          path: '/login'
         },
         {
-          name: "工作站任务列表",
-          path: "/desktop"
+          name: '工作站任务列表',
+          path: '/desktop'
         },
         {
-          name: "工作站任务详情",
-          path: "/desktop/detail"
+          name: '工作站任务详情',
+          path: '/desktop/detail'
         },
         {
-          name: "地图视图",
-          path: "/desktop/map"
+          name: '地图视图',
+          path: '/desktop/map'
         },
         {
-          name: "患者列表",
-          path: "/patient"
+          name: '患者列表',
+          path: '/patient'
         },
         {
-          name: "创建患者档案",
-          path: "/patient/addForm"
+          name: '创建患者档案',
+          path: '/patient/addForm'
         },
         {
-          name: "患者档案",
-          path: "/patient/record"
+          name: '患者档案',
+          path: '/patient/record'
         },
         {
-          name: "消息中心",
-          path: "/message"
+          name: '消息中心',
+          path: '/message'
         }
       ]
-    };
+    }
   },
   methods: {},
   components: {}
-};
+}
 </script>

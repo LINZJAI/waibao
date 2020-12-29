@@ -80,7 +80,7 @@
         </el-table-column>
         <el-table-column prop="eventTime" label="发单时间" min-width="150">
         </el-table-column>
-        <el-table-column prop="taskNo" label="急救编号" min-width="100">
+        <el-table-column prop="taskNo" label="急救编号" min-width="120">
         </el-table-column>
         <el-table-column prop="eventType" label="求救类型" min-width="100">
         </el-table-column>
